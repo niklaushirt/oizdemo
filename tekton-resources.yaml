@@ -1,19 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: demo-oiz-git-nikh
-spec:
-  type: git
-  params:
-    - name: revision
-      value: nikh
-    - name: url
-      value: https://github.com/niklaushirt/oizdemo
----
-apiVersion: tekton.dev/v1alpha1
-kind: PipelineResource
-metadata:
-  name: demo-oiz-git-master
+  name: oiz-demo-git
 spec:
   type: git
   params:
@@ -25,9 +13,21 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: demo-oiz-image-wordpress
+  name: oiz-demo-git-dev
+spec:
+  type: git
+  params:
+    - name: revision
+      value: nikh
+    - name: url
+      value: https://github.com/niklaushirt/oizdemo
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: oiz-demo-image-leeroy-web
 spec:
   type: image
   params:
     - name: url
-      value: quay.io/niklaushirtibm/wordpress
+      value: quay.io/niklaushirtibm/test

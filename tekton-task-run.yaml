@@ -6,11 +6,6 @@ spec:
   serviceAccountName: oiz-demo-service-account
   taskRef:
     name: build-image-from-git-source
-  params:
-    - name: pathToDockerFile
-      value: $(resources.inputs.docker-source.path)/src/Dockerfile
-    - name: pathToContext
-      value: $(resources.inputs.docker-source.path)/source #configure: may change according to your source
   resources:
     inputs:
       - name: docker-source
