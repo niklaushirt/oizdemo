@@ -7,7 +7,7 @@ spec:
     - name: pathToDockerFile
       type: string
       description: The path to the dockerfile to build
-      default: $(resources.inputs.docker-source.path)/Dockerfile
+      default: $(resources.inputs.docker-source.path)/src/Dockerfile
     - name: pathToContext
       type: string
       description: |
@@ -41,4 +41,4 @@ spec:
       args:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(resources.outputs.builtImage.url)
-        - --context=quay.io/niklaushirtibm/wordpress
+        - --context=quay.io/niklaushirtibm/
