@@ -19,7 +19,7 @@ metadata:
   labels:
     app: wordpress
 spec:
-  storageClassName: rook-ceph-block
+  storageClassName: ibmc-block-gold
   accessModes:
   - ReadWriteOnce
   resources:
@@ -60,6 +60,13 @@ spec:
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "50Mi"
+          limits:
+            cpu: "50m"
+            memory: "50Mi"
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:

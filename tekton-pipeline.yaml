@@ -24,7 +24,7 @@ spec:
         name: deploy-using-kubectl
       resources:
         inputs:
-          - name: source
+          - name: kubernetes-source
             resource: source-repo
           - name: image
             resource: web-image
@@ -32,6 +32,6 @@ spec:
               - build-oiz-demo-web
       params:
         - name: path
-          value: /workspace/deploy/prod/deployment.yaml #configure: may change according to your source
+          value: /workspace/kubernetes-source/deploy/prod/deployment.yaml #configure: may change according to your source
         - name: yamlPathToImage
           value: "spec.template.spec.containers[0].image"

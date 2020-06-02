@@ -5,13 +5,17 @@ metadata:
 spec:
   serviceAccountName: oiz-demo-service-account
   taskRef:
-    name: build-image-from-git-source
+    name: deploy-using-kubectl
   resources:
     inputs:
-      - name: docker-source
+      - name: kubernetes-source
         resourceRef:
-          name: demo-oiz-git-master
-    outputs:
-      - name: builtImage
+          name: oiz-demo-git
+      - name: image
         resourceRef:
-          name: demo-oiz-image-wordpress
+          name: oiz-demo-image-leeroy-web
+  params:
+    - name: path
+      value: /workspace/kubernetes-source/deploy/prod/deployment.yaml #configure: may change according to your source
+    - name: yamlPathToImage
+      value: "spec.template.spec.containers[0].image"

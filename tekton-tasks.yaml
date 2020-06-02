@@ -64,11 +64,17 @@ spec:
         The path to the image to replace in the yaml manifest (arg to yq)
   resources:
     inputs:
-      - name: source
+      - name: kubernetes-source
         type: git
       - name: image
         type: image
   steps:
+    - name: echo5
+      image: busybox
+      script: echo $(resources.inputs.image.url)
+    - name: echo24
+      image: busybox
+      script: cd kubernetes-source && ls
     - name: replace-image
       image: mikefarah/yq
       command: ["yq"]
