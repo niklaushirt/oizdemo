@@ -3,7 +3,7 @@ kind: PipelineRun
 metadata:
   name: oiz-demo-pipeline-run
 spec:
-  serviceAccountName: pipeline
+  serviceAccountName: oiz-demo-service-account
   pipelineRef:
     name: oiz-demo-pipeline
   resources:

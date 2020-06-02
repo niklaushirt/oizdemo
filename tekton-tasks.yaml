@@ -13,7 +13,7 @@ spec:
       description: |
         The build context used by Kaniko
         (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
-      default: $(resources.inputs.docker-source.path)
+      default: $(resources.inputs.docker-source.path)/src
   resources:
     inputs:
       - name: docker-source
@@ -41,4 +41,4 @@ spec:
       args:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(resources.outputs.builtImage.url)
-        - --context=quay.io/niklaushirtibm/
+        - --context=$(params.pathToContext)

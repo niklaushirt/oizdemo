@@ -9,34 +9,20 @@ spec:
     - name: web-image
       type: image
   tasks:
-    - name: build-oiz-demo-wordpress
+    - name: build-skaffold-web
       taskRef:
         name: build-image-from-git-source
       params:
         - name: pathToDockerFile
-          value: Dockerfile
+          value: $(resources.inputs.docker-source.path)/src/Dockerfile
         - name: pathToContext
-          value: /workspace/source #configure: may change according to your source
+          value: $(resources.inputs.docker-source.path)/source #configure: may change according to your source
       resources:
         inputs:
           - name: docker-source
-            resource: source-repo
+            resourceRef:
+              name: demo-oiz-git-master
         outputs:
           - name: builtImage
-            resource: web-image
-    - name: deploy-web
-      taskRef:
-        name: deploy-oiz-demo-wordpress
-      resources:
-        inputs:
-          - name: source
-            resource: source-repo
-          - name: image
-            resource: web-image
-            from:
-              - build-oiz-demo-wordpress
-      params:
-        - name: path
-          value: /workspace/deploy/dev/deployment.yaml #configure: may change according to your source
-        - name: yamlPathToImage
-          value: "spec.template.spec.containers[0].image"
+            resourceRef:
+              name: demo-oiz-image-wordpress
