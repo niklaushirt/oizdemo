@@ -31,3 +31,13 @@ spec:
   params:
     - name: url
       value: quay.io/niklaushirtibm/wordpress:1.2.0
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: oiz-demo-image-dev
+spec:
+  type: image
+  params:
+    - name: url
+      value: quay.io/niklaushirtibm/wordpress:dev-1.2.0

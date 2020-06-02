@@ -19,7 +19,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:4.6.1-apache
+      - image: quay.io/niklaushirtibm/wordpress:1.2.0
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST

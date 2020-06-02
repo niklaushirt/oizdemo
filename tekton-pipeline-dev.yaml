@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: pipeline-prod
+  name: pipeline-dev
 spec:
   resources:
     - name: source-repo
@@ -32,6 +32,6 @@ spec:
               - build-oiz-demo-web
       params:
         - name: path
-          value: /workspace/kubernetes-source/deploy/prod #configure: may change according to your source
+          value: /workspace/kubernetes-source/deploy/dev #configure: may change according to your source
         - name: yamlPathToImage
           value: "spec.template.spec.containers[0].image"

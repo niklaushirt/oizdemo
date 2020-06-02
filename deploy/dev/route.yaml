@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: wordpress-dev
+  labels:
+    app: wordpress
+spec:
+  to:
+    kind: Service
+    name: wordpress
+    weight: 100
+  port:
+    targetPort: 80
+  wildcardPolicy: None
