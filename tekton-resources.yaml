@@ -30,4 +30,4 @@ spec:
   type: image
   params:
     - name: url
-      value: quay.io/niklaushirtibm/test
+      value: quay.io/niklaushirtibm/wordpress:1.2.0

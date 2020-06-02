@@ -43,3 +43,5 @@ spec:
         - "apply"
         - "-f"
         - "$(params.path)"
+        - "-n"
+        - "default"
