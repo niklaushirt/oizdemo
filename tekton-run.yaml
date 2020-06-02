@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: tutorial-pipeline-run-1
+  name: oiz-demo-pipeline-run
 spec:
-  serviceAccountName: tutorial-service
+  serviceAccountName: pipeline
   pipelineRef:
-    name: tutorial-pipeline
+    name: oiz-demo-pipeline
   resources:
     - name: source-repo
       resourceRef:

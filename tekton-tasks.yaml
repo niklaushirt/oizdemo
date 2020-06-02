@@ -22,9 +22,17 @@ spec:
       - name: builtImage
         type: image
   steps:
+    - name: echo
+      image: busybox
+      script: cat $(params.pathToDockerFile)
+    - name: echo1
+      image: busybox
+      script: echo $(resources.outputs.builtImage.url)
     - name: build-and-push
       image: gcr.io/kaniko-project/executor:v0.17.1
       # specifying DOCKER_CONFIG is required to allow kaniko to detect docker credential
+      securityContext:
+        runAsUser: 0
       env:
         - name: "DOCKER_CONFIG"
           value: "/tekton/home/.docker/"
@@ -33,4 +41,4 @@ spec:
       args:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(resources.outputs.builtImage.url)
-        - --context=$(params.pathToContext)
+        - --context=quay.io/niklaushirtibm/wordpress

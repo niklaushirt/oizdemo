@@ -11,12 +11,12 @@ spec:
   tasks:
     - name: build-oiz-demo-wordpress
       taskRef:
-        name: build-docker-image-from-git-source
+        name: build-image-from-git-source
       params:
         - name: pathToDockerFile
           value: Dockerfile
         - name: pathToContext
-          value: /workspace/docker-source/examples/microservices/leeroy-web #configure: may change according to your source
+          value: /workspace/source #configure: may change according to your source
       resources:
         inputs:
           - name: docker-source
@@ -34,7 +34,7 @@ spec:
           - name: image
             resource: web-image
             from:
-              - build-demo-web
+              - build-oiz-demo-wordpress
       params:
         - name: path
           value: /workspace/deploy/dev/deployment.yaml #configure: may change according to your source
