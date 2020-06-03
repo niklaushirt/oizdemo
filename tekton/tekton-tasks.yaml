@@ -34,10 +34,10 @@ spec:
     - image: busybox
       name: docker-image
       resources: {}
-      script: echo $(resources.outputs.builtImage.url)-$(params.environment)-$(params.image-version)
+      script: echo $(resources.outputs.builtImage.url):$(params.environment)-$(params.image-version)
     - args:
         - '--dockerfile=$(params.pathToDockerFile)'
-        - '--destination=$(resources.outputs.builtImage.url)-$(params.environment)-$(params.image-version)'
+        - '--destination=$(resources.outputs.builtImage.url):$(params.environment)-$(params.image-version)'
         - '--context=$(params.pathToContext)'
       command:
         - /kaniko/executor
@@ -89,7 +89,7 @@ spec:
         - "-i"
         - "$(params.path)/deployment.yaml"
         - "$(params.yamlPathToImage)"
-        - "$(resources.inputs.image.url)-$(params.environment)-$(params.image-version)"
+        - "$(resources.inputs.image.url):$(params.environment)-$(params.image-version)"
     - name: finalyaml
       image: busybox
       script: cat $(params.path)/deployment.yaml
