@@ -61,7 +61,17 @@ kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-tasks.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-complete.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-local.yaml
+```
 
+### Create Triggers
+
+Create two GitHub WebHooks to the triggers.
+dev: push
+prod: pull_request
+
+```bash
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger-global.yaml
 ```
 
 ### Create Pipeline Runs
@@ -80,9 +90,9 @@ kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-complete.yaml
 
 ## Delete Pipeline Resources
 ```bash
-kubectl delete -n oiz-demo-pipeline pipeline --all
-kubectl delete -n oiz-demo-pipeline pipelinerun --all
 kubectl delete -n oiz-demo-pipeline taskrun --all
+kubectl delete -n oiz-demo-pipeline pipelinerun --all
+kubectl delete -n oiz-demo-pipeline pipeline --all
 kubectl delete -n oiz-demo-pipeline tasks --all
 kubectl delete -n oiz-demo-pipeline pipelineresource --all
 ```

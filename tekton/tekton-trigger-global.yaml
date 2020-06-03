@@ -38,7 +38,7 @@ spec:
               name: prod-cluster
         params:
           - name: image-version
-            value: "200603"
+            value: $(params.gitrevision)
           - name: environment
             value: "dev"
           - name: cluster-url
