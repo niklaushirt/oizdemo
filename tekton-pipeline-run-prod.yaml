@@ -12,7 +12,7 @@ spec:
         name: oiz-demo-git
     - name: web-image
       resourceRef:
-        name: oiz-demo-image-leeroy-web
+        name: oiz-demo-image
   params:
     - name: image-version
       value: "200603"

@@ -25,7 +25,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: oiz-demo-image-leeroy-web
+  name: oiz-demo-image
 spec:
   type: image
   params:
