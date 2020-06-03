@@ -1,4 +1,4 @@
-FROM quay.io/niklaushirtibm/oizdemobase:1.1.0
+FROM quay.io/niklaushirtibm/oizdemobase:1.0.0
 
 COPY docker-entrypoint.sh /usr/local/bin/
 

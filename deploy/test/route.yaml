@@ -1,7 +1,7 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: wordpress-dev
+  name: wordpress-test
   labels:
     app: wordpress
 spec:
