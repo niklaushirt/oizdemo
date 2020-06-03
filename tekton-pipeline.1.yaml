@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: demo-pipeline
+  name: pipeline-prod
 spec:
   resources:
     - name: source-repo
@@ -46,6 +46,6 @@ spec:
         - name: yamlPathToImage
           value: "spec.template.spec.containers[0].image"
         - name: environment
-          value: $(params.environment)      
+          value: $(params.environment)        
         - name: image-version
-          value: $(params.image-version)  
+          value: $(params.image-version)

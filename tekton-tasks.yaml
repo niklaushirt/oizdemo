@@ -14,6 +14,11 @@ spec:
         (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
       name: pathToContext
       type: string
+    - name: image-version
+      type: string
+    - name: environment
+      type: string
+      description: dev/test/prod
   resources:
     inputs:
       - name: docker-source
@@ -23,24 +28,16 @@ spec:
         type: image
   steps:
     - image: busybox
-      name: ls
-      resources: {}
-      script: ls
-    - image: busybox
-      name: echo2
-      resources: {}
-      script: echo $(params.pathToDockerFile)
-    - image: busybox
-      name: echo
+      name: show-dockerfile
       resources: {}
       script: cat $(params.pathToDockerFile)
     - image: busybox
-      name: echo1
+      name: docker-image
       resources: {}
-      script: echo $(resources.outputs.builtImage.url)
+      script: echo $(resources.outputs.builtImage.url)-$(params.environment)-$(params.image-version)
     - args:
         - '--dockerfile=$(params.pathToDockerFile)'
-        - '--destination=$(resources.outputs.builtImage.url)'
+        - '--destination=$(resources.outputs.builtImage.url)-$(params.environment)-$(params.image-version)'
         - '--context=$(params.pathToContext)'
       command:
         - /kaniko/executor
@@ -59,6 +56,11 @@ metadata:
   name: deploy-using-kubectl
 spec:
   params:
+    - name: environment
+      type: string
+    - name: image-version
+      type: string
+      description: dev/test/prod
     - name: path
       type: string
       description: Path to the manifest to apply
@@ -73,10 +75,10 @@ spec:
       - name: image
         type: image
   steps:
-    - name: echo5
+    - name: environment
       image: busybox
-      script: echo $(resources.inputs.image.url)
-    - name: echo24
+      script: echo $(params.environment)
+    - name: list-dir
       image: busybox
       script: cd kubernetes-source && ls
     - name: replace-image
@@ -87,19 +89,10 @@ spec:
         - "-i"
         - "$(params.path)/deployment.yaml"
         - "$(params.yamlPathToImage)"
-        - "$(resources.inputs.image.url)"
+        - "$(resources.inputs.image.url)-$(params.environment)-$(params.image-version)"
     - name: finalyaml
       image: busybox
       script: cat $(params.path)/deployment.yaml
-    - name: delete-previous
-      image: lachlanevenson/k8s-kubectl
-      command: ["kubectl"]
-      args:
-        - "delete"
-        - "-f"
-        - "$(params.path)"
-        - "-n"
-        - "default"
     - name: run-kubectl
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]
@@ -108,4 +101,4 @@ spec:
         - "-f"
         - "$(params.path)"
         - "-n"
-        - "default"
+        - "demo-oiz-$(params.environment)"

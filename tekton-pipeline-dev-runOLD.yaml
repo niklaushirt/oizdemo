@@ -5,16 +5,12 @@ metadata:
 spec:
   serviceAccountName: oiz-demo-service-account
   pipelineRef:
-    name: demo-pipeline
+    name: pipeline-dev
   resources:
     - name: source-repo
       resourceRef:
         name: oiz-demo-git-dev
     - name: web-image
       resourceRef:
-        name: oiz-demo-image-leeroy-web
-  params:
-    - name: image-version
-      value: "200603"
-    - name: environment
-      value: "dev"
+        name: oiz-demo-image-dev
+        

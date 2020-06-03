@@ -19,3 +19,5 @@ spec:
       value: /workspace/kubernetes-source/deploy/prod #configure: may change according to your source
     - name: yamlPathToImage
       value: "spec.template.spec.containers[0].image"
+    - name: environment
+      value: prod1
