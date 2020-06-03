@@ -59,8 +59,8 @@ Manifests in folder `tekton`
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-init.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-tasks.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-build-deploy.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-deploy.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-complete.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-local.yaml
 
 ```
 
@@ -69,9 +69,8 @@ kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-deploy.yaml
 Manifests in folder `tekton`
 
 ```bash
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-dev.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-test.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-prod.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-local.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-complete.yaml
 ```
 
 
