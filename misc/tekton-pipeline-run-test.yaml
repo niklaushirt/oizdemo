@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipeline-test-run-1
+spec:
+  serviceAccountName: oiz-demo-service-account
+  pipelineRef:
+    name: demo-pipeline-deploy
+  resources:
+    - name: source-repo
+      resourceRef:
+        name: oiz-demo-git
+    - name: web-image
+      resourceRef:
+        name: oiz-demo-image
+  params:
+    - name: image-version
+      value: "200603"
+    - name: environment
+      value: "test"
+    - name: cluster-url
+      value: https://c100-e.eu-de.containers.cloud.ibm.com:30761
+    - name: cluster-token
+      value: 1yYDIbgCV-1B4VUh9M1XPFfjWn7dJnNIGzDPK5eyrlc 

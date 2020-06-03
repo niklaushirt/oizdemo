@@ -1,0 +1,24 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: admin-binding-resourceURLSs
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: demo-oiz-prod
+  - kind: ServiceAccount
+    name: default
+    namespace: demo-oiz-test
+  - kind: ServiceAccount
+    name: default
+    namespace: demo-oiz-dev
+  - kind: ServiceAccount
+    name: oiz-demo-service-account
+    namespace: oiz-demo-pipeline
+  - kind: ServiceAccount
+    name: tekton-dashboard
+    namespace: openshift-pipelines
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin

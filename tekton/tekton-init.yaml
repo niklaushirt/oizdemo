@@ -4,4 +4,3 @@ metadata:
   name: oiz-demo-service-account
 secrets:
   - name: regcred
-  

@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipeline-run-complete-1
+spec:
+  serviceAccountName: oiz-demo-service-account
+  pipelineRef:
+    name: demo-pipeline-complete
+  resources:
+    - name: source-repo
+      resourceRef:
+        name: oiz-demo-git
+    - name: web-image
+      resourceRef:
+        name: oiz-demo-image
+    - name: local-cluster
+      resourceRef:
+        name: local-cluster
+    - name: prod-cluster
+      resourceRef:
+        name: prod-cluster
+  params:
+    - name: image-version
+      value: "200603"
+    - name: environment
+      value: "dev"
+    - name: cluster-url
+      value: https://c100-e.eu-de.containers.cloud.ibm.com:30761
+    - name: cluster-token
+      value: 1yYDIbgCV-1B4VUh9M1XPFfjWn7dJnNIGzDPK5eyrlc
+    - name: cluster-prod-url
+      value: https://c100-e.eu-de.containers.cloud.ibm.com:32764 
+    - name: cluster-prod-token
+      value: CtWGTAQX4nrIDdGvWVVywtTw_35zm-c3GdkurtE-V_s
