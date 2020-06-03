@@ -37,18 +37,24 @@ kubectl create -n oiz-demo-pipeline secret docker-registry regcred \
 ```
 
 ### Create Base Stuff
+
+Manifests in folder `deploy`
+
 ```bash
-kubectl apply -n demo-oiz-prod -f deploy/prod/
-kubectl apply -n demo-oiz-prod -f deploy/db
+kubectl apply -n demo-oiz-prod -f ./deploy/prod/
+kubectl apply -n demo-oiz-prod -f ./deploy/db
 
-kubectl apply -n demo-oiz-test -f deploy/test/
-kubectl apply -n demo-oiz-test -f deploy/db
+kubectl apply -n demo-oiz-test -f ./deploy/test/
+kubectl apply -n demo-oiz-test -f ./deploy/db
 
-kubectl apply -n demo-oiz-dev -f deploy/dev/
-kubectl apply -n demo-oiz-dev -f deploy/db/
+kubectl apply -n demo-oiz-dev -f ./deploy/dev/
+kubectl apply -n demo-oiz-dev -f ./deploy/db/
 ```
 
 ### Create Pipeline
+
+Manifests in folder `tekton`
+
 ```bash
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-init.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources.yaml
@@ -57,6 +63,9 @@ kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline.yaml
 ```
 
 ### Create Pipeline Runs
+
+Manifests in folder `tekton`
+
 ```bash
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-dev.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-test.yaml
