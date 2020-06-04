@@ -34,8 +34,6 @@ spec:
     - name: deploy-dev
       taskRef:
         name: deploy-using-kubectl
-      runAfter:
-        - build-oiz-demo
       resources:
         inputs:
           - name: kubernetes-source
