@@ -148,6 +148,27 @@ kubectl delete -n oiz-demo-pipeline pipelinerun --all
 kubectl delete -n oiz-demo-pipeline pipeline --all
 kubectl delete -n oiz-demo-pipeline tasks --all
 kubectl delete -n oiz-demo-pipeline pipelineresource --all
+
+
+kubectl delete deployment wordpress -n demo-oiz-dev-nikh 
+kubectl delete deployment wordpress-mysql -n demo-oiz-dev-nikh 
+kubectl delete service wordpress -n demo-oiz-dev-nikh 
+kubectl delete route wordpress-dev -n demo-oiz-dev-nikh 
+
+kubectl delete deployment wordpress -n demo-oiz-dev
+kubectl delete deployment wordpress-mysql -n demo-oiz-dev
+kubectl delete service wordpress -n demo-oiz-dev
+kubectl delete route wordpress-dev -n demo-oiz-dev
+
+kubectl delete deployment wordpress -n demo-oiz-test
+kubectl delete deployment wordpress-mysql -n demo-oiz-test
+kubectl delete service wordpress -n demo-oiz-test
+kubectl delete route wordpress-dev -n demo-oiz-test
+
+kubectl delete deployment wordpress -n demo-oiz-prod
+kubectl delete deployment wordpress-mysql -n demo-oiz-prod
+kubectl delete service wordpress -n demo-oiz-prod
+kubectl delete route wordpress-dev -n demo-oiz-prod
 ```
 
 
