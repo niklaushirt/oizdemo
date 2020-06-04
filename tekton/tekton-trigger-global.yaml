@@ -38,7 +38,7 @@ spec:
               name: prod-cluster
         params:
           - name: image-version
-            value: $(params.gitrevision)
+            value: oizdemo-200608
           - name: environment
             value: "dev"
           - name: cluster-url

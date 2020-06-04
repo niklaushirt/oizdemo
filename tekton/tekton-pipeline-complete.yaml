@@ -31,24 +31,6 @@ spec:
       type: string
   tasks:
 
-
-    - name: build-oiz-demo
-      taskRef:
-        name: build-docker-image-from-git-source
-      resources:
-        inputs:
-          - name: docker-source
-            resource: source-repo
-        outputs:
-          - name: builtImage
-            resource: web-image
-      params:
-      - name: environment
-        value: dev        
-      - name: image-version
-        value: $(params.image-version)
-
-
     - name: deploy-dev
       taskRef:
         name: deploy-using-kubectl
@@ -60,8 +42,6 @@ spec:
             resource: source-repo
           - name: image
             resource: web-image
-            from:
-              - build-oiz-demo
       params:
         - name: path
           value: /workspace/kubernetes-source/deploy/$(params.environment) #configure: may change according to your source
@@ -117,8 +97,6 @@ spec:
             resource: source-repo
           - name: image
             resource: web-image
-            from:
-              - build-oiz-demo
       params:
         - name: path
           value: /workspace/kubernetes-source/deploy/$(params.environment) #configure: may change according to your source
@@ -173,8 +151,6 @@ spec:
             resource: source-repo
           - name: image
             resource: web-image
-            from:
-              - build-oiz-demo
       params:
         - name: path
           value: /workspace/kubernetes-source/deploy/$(params.environment) #configure: may change according to your source
