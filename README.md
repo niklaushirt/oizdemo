@@ -36,7 +36,22 @@ kubectl create -n oiz-demo-pipeline secret docker-registry regcred \
                     --docker-email=<MY_EMAIL>
 ```
 
-### Create Base Stuff
+### Create Cluster Secrets
+
+```bash
+kubectl create -n oiz-demo-pipeline secret generic local-cluster-secrets \
+                    --from-literal=url=https://c100-e.eu-de.containers.cloud.ibm.com:30761 \
+                    --from-literal=cadatakey=1yYDIbgCV-1B4VUh9M1XPFfjWn7dJnNIGzDPK5eyrlc \
+                    --from-literal=tokenkey=1yYDIbgCV-1B4VUh9M1XPFfjWn7dJnNIGzDPK5eyrlc
+```
+
+```bash
+kubectl create -n oiz-demo-pipeline secret generic prod-cluster-secrets \
+                    --from-literal=url=https://c100-e.eu-de.containers.cloud.ibm.com:32764 \
+                    --from-literal=cadatakey=CtWGTAQX4nrIDdGvWVVywtTw_35zm-c3GdkurtE-V_s \
+                    --from-literal=tokenkey=CtWGTAQX4nrIDdGvWVVywtTw_35zm-c3GdkurtE-V_s
+```
+## Create Base Demo Stuff
 
 Manifests in folder `deploy`
 
@@ -51,28 +66,23 @@ kubectl apply -n demo-oiz-dev -f ./deploy/dev/
 kubectl apply -n demo-oiz-dev -f ./deploy/db/
 ```
 
-### Create Pipeline
+## Create Pipeline
+
+
+
+
 
 Manifests in folder `tekton`
 
 ```bash
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-init.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources-git.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-resources-cluster.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-tasks.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-complete.yaml
 kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-local.yaml
 ```
 
-### Create Triggers
-
-Create two GitHub WebHooks to the triggers.
-dev: push
-prod: pull_request
-
-```bash
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger.yaml
-kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger-global.yaml
-```
 
 ### Create Pipeline Runs
 
@@ -84,6 +94,45 @@ kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-pipeline-run-complete.yaml
 ```
 
 
+## Create Triggers
+
+Create two GitHub WebHooks to the triggers.
+dev: push
+prod: pull_request
+
+```bash
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger.yaml
+kubectl apply -n oiz-demo-pipeline -f ./tekton/tekton-trigger-global.yaml
+```
+
+### Simulate GitHub events
+
+#### Push event
+
+```bash
+curl -v \
+-H 'X-GitHub-Event: push' \
+-H 'X-Hub-Signature: sha1=04b10a4629d3f62606fdd8d4824cbe546eb43e1d' \
+-H 'Content-Type: application/json' \
+-d '{"head_commit":{"id":"4e054cddfa7c3d81b2ca562e5298b823c404b0c5"},"repository":{"url": "https://github.com/tektoncd/triggers"}}' \
+http://github-oiz-demo-pipeline.oizdemo1-a376efc1170b9b8ace6422196c51e491-0000.eu-de.containers.appdomain.cloud/
+```
+
+#### Pull Request event
+
+```bash
+curl -v \
+-H 'X-GitHub-Event: pull_request' \
+-H 'X-Hub-Signature: sha1=4cb5c8288af057acaf1ae5f078c58bf074ae236c' \
+-H 'Content-Type: application/json' \
+-d '{"pull_request":{"id":"427329658"},"repository":{"url": "https://github.com/tektoncd/triggers"}}' \
+http://github-prod-oiz-demo-pipeline.oizdemo1-a376efc1170b9b8ace6422196c51e491-0000.eu-de.containers.appdomain.cloud/
+```
+
+If you want to alter the payload you have to change the X-Hub-Signature with a Secret Key of `1234567`.
+
+This can be done here: 
+[HMAC Generator](https://www.freeformatter.com/hmac-generator.html)
 
 
 

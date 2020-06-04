@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: local-cluster
+spec:
+  type: cluster
+  params:
+    - name: url
+      value: https://c100-e.eu-de.containers.cloud.ibm.com:30761 # url to the cluster master node
+    - name: cadata
+      value: w5L0nTig8E3VbHv94XfC7I08UEELNbebi3Ki4vgaVdQ
+    - name: token
+      value: w5L0nTig8E3VbHv94XfC7I08UEELNbebi3Ki4vgaVdQ
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: prod-cluster
+spec:
+  type: cluster
+  params:
+    - name: url
+      value: https://c100-e.eu-de.containers.cloud.ibm.com:32764 # url to the cluster master node
+    - name: cadata
+      value: CtWGTAQX4nrIDdGvWVVywtTw_35zm-c3GdkurtE-V_s
+    - name: token
+      value: CtWGTAQX4nrIDdGvWVVywtTw_35zm-c3GdkurtE-V_s

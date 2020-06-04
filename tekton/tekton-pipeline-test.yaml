@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: demo-pipeline-local
+  name: demo-pipeline-test111
 spec:
   resources:
     - name: source-repo
@@ -22,34 +22,15 @@ spec:
       type: string
       default: $(resources.local-cluster.token)
   tasks:
-    - name: build-oiz-demo-local
-      taskRef:
-        name: build-docker-image-from-git-source
-      resources:
-        inputs:
-          - name: docker-source
-            resource: source-repo
-        outputs:
-          - name: builtImage
-            resource: web-image
-      params:
-      - name: environment
-        value: $(params.environment)        
-      - name: image-version
-        value: $(params.image-version)-dev
     - name: deploy-web
       taskRef:
-        name: deploy-using-kubectl
-      runAfter:
-        - build-oiz-demo-local
+        name: output-vars
       resources:
         inputs:
           - name: kubernetes-source
             resource: source-repo
           - name: image
             resource: web-image
-            from:
-              - build-oiz-demo-local
       params:
         - name: path
           value: /workspace/kubernetes-source/deploy/$(params.environment) #configure: may change according to your source

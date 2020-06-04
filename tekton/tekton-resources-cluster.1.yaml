@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: local-cluster
+spec:
+  type: cluster
+  secrets:
+    - fieldName: url
+      secretKey: url
+      secretName: local-cluster-secrets
+    - fieldName: token
+      secretKey: tokenKey
+      secretName: local-cluster-secrets
+    - fieldName: cadata
+      secretKey: cadataKey
+      secretName: local-cluster-secrets
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: prod-cluster
+spec:
+  type: cluster
+  secrets:
+    - fieldName: url
+      secretKey: url
+      secretName: prod-cluster-secrets
+    - fieldName: token
+      secretKey: tokenKey
+      secretName: prod-cluster-secrets
+    - fieldName: cadata
+      secretKey: cadataKey
+      secretName: prod-cluster-secrets

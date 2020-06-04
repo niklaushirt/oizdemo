@@ -1,26 +1,23 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: pipeline-run-complete-1
+  name: pipeline-run-test-1
 spec:
   serviceAccountName: oiz-demo-service-account
   pipelineRef:
-    name: demo-pipeline-complete
+    name: demo-pipeline-test111
   resources:
     - name: source-repo
       resourceRef:
-        name: oiz-demo-git
+        name: oiz-demo-git-dev-nikh
     - name: web-image
       resourceRef:
         name: oiz-demo-image
     - name: local-cluster
       resourceRef:
         name: local-cluster
-    - name: prod-cluster
-      resourceRef:
-        name: prod-cluster
   params:
     - name: image-version
       value: "200603"
     - name: environment
-      value: "dev"
+      value: "nikh"
