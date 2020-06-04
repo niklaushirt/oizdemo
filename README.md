@@ -20,6 +20,7 @@ kubectl apply -n openshift-pipelines -f ./misc/tekton-dashboard-release.yaml
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:oiz-demo-pipeline:oiz-demo-service-account
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo-oiz-prod:default
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo-oiz-dev-nikh:default
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo-oiz-nikh:default
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo-oiz-test:default
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo-oiz-dev:default
 oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:openshift-pipelines:tekton-dashboard
@@ -64,6 +65,9 @@ kubectl apply -n demo-oiz-test -f ./deploy/db
 
 kubectl apply -n demo-oiz-dev -f ./deploy/dev/
 kubectl apply -n demo-oiz-dev -f ./deploy/db/
+
+kubectl apply -n demo-oiz-nikh -f ./deploy/dev/
+kubectl apply -n demo-oiz-nikh -f ./deploy/db/
 ```
 
 ## Create Pipeline
