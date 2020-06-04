@@ -22,7 +22,7 @@ spec:
       type: string
       default: $(resources.local-cluster.token)
   tasks:
-    - name: build-oiz-demo-local
+    - name: build-oiz-demo
       taskRef:
         name: build-docker-image-from-git-source
       resources:
@@ -36,12 +36,12 @@ spec:
       - name: environment
         value: $(params.environment)        
       - name: image-version
-        value: $(params.image-version)-dev
-    - name: deploy-web
+        value: $(params.image-version)
+    - name: deploy-dev-nikh
       taskRef:
         name: deploy-using-kubectl
       runAfter:
-        - build-oiz-demo-local
+        - build-oiz-demo
       resources:
         inputs:
           - name: kubernetes-source
@@ -49,7 +49,7 @@ spec:
           - name: image
             resource: web-image
             from:
-              - build-oiz-demo-local
+              - build-oiz-demo
       params:
         - name: path
           value: /workspace/kubernetes-source/deploy/$(params.environment) #configure: may change according to your source
@@ -58,7 +58,7 @@ spec:
         - name: environment
           value: $(params.environment)      
         - name: image-version
-          value: $(params.image-version)-dev  
+          value: $(params.image-version)
         - name: cluster-url
           value: $(params.cluster-url)  
         - name: cluster-token
