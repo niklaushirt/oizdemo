@@ -44,11 +44,11 @@ spec:
           - name: cluster-url
             value: https://c100-e.eu-de.containers.cloud.ibm.com:30761
           - name: cluster-token
-            value: w5L0nTig8E3VbHv94XfC7I08UEELNbebi3Ki4vgaVdQ
+            value: QjygGijhkanKJ5Xy5BJzto319xuOFmzpU-kTjP9u1n4
           - name: cluster-prod-url
             value: https://c100-e.eu-de.containers.cloud.ibm.com:32764 
           - name: cluster-prod-token
-            value: 3nn4vDbOCIUNr3_GzyPPecLfKhGxsCEHagJ-600BbzM
+            value: Expp2wVl8vl4mKmkrAKdsFcOySM6r_-mfexrdsuwMqI
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
